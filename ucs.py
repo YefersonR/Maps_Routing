@@ -1,11 +1,16 @@
+# https://stackoverflow.com/questions/43354715/uniform-cost-search-in-python
+# https://plainenglish.io/blog/uniform-cost-search-ucs-algorithm-in-python-ec3ee03fca9f
+# https://python.plainenglish.io/graph-data-structure-theory-and-python-implementation-ee8c9795eae7
+
 from Mapa import (
     GetNodesChildren,
     GetWays,
     ways,
     Graph
 )
-import heapq
-def prueba_UCS(initialNode, goalNode, adjacencyList):
+from Front import draw_solution
+import heapq #https://docs.python.org/3/library/heapq.html
+def UCS(initialNode, goalNode, adjacencyList):
     FrontierCost = []
 
     frontier = []
@@ -35,8 +40,9 @@ def prueba_UCS(initialNode, goalNode, adjacencyList):
 
             solution.append(initialNode)
             solution.reverse()
-            print("Ha llegado a su destino")
-            print(solution)
+            draw_solution(initialNode,goalNode,solution)
+            print("Se ha encontrado la ruta mas corta a su destino")
+            # print(solution)
 
             break
 
@@ -55,11 +61,12 @@ def prueba_UCS(initialNode, goalNode, adjacencyList):
 
 
 g = Graph(ways)
-print(prueba_UCS((18.4870666,-69.8769768),(18.4961680,-69.8886738), g.getAdyacencia()))
+shorterPath = UCS((18.4870666,-69.8769768),(18.4819294, -69.8799627), g.getAdyacencia())
 
 
-# (18.4857774,-69.8789543), (18.4850415,-69.8813206)
-# (18.4940667, -69.8894379), (18.4857774,-69.8789543)
-# (18.4961680,-69.8886738), (18.4947003,-69.8953688)
-# (18.4870666,-69.8769768),(18.4961680,-69.8886738)
-# 
+# (18.4873418,-69.8836541),(18.4869884,-69.8891887)
+# (18.4857774,-69.8789543),(18.4870666,-69.8769768)
+# (18.4961680,-69.8886738),(18.4857774,-69.8789543)
+# (18.4961680,-69.8886738), (18.4759391, -69.9087016)
+# (18.4870666,-69.8769768),(18.4819294, -69.8799627)
+

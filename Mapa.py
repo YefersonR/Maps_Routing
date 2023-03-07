@@ -1,5 +1,4 @@
-from lxml import etree
-from dataclasses import dataclass
+from lxml import etree # https://lxml.de/
 import math
 
 with open("map.osm",encoding='UTF8') as f:
@@ -24,7 +23,7 @@ class Way():
         self.id = id
         self.tags = tags
         self.nodes = nodes
-        self.oneway = True
+        self.oneway = False
     def __repr__(self):
         return f"{self.id, self.tags, self.nodes}"
     def __str__(self):
@@ -63,8 +62,8 @@ def GetWays():
                 
             if tag.tag == 'tag':
                 via.tags.append(tag.tag)
-                if(tag.attrib["k"] == 'oneway' and tag.attrib["v"] == 'no'):
-                    via.oneway == False
+                if(tag.attrib["k"] == 'oneway' and tag.attrib["v"] == 'yes'):
+                    via.oneway == True
 
 
 
@@ -76,15 +75,16 @@ def GetWays():
         ways.append(via)    
 
 class Edge():
-    def __init__(self,firstNode,secondNode,dirigido):
+    def __init__(self,firstNode,secondNode,oneway):
         self.firstNode = firstNode
         self.secondNode = secondNode
-        self.dirigido = dirigido
+        self.oneway = oneway
     def __repr__(self):
         return f"{self.firstNode, self.secondNode}"
     def __str__(self):
         return f"{self.firstNode, self.secondNode}"
     def cost(self):
+        # https://noticias.coches.com/consejos/medir-distancia-dos-puntos/462887
         return math.sqrt((float(self.firstNode.lon) - float(self.secondNode.lon))**2 + (float(self.firstNode.lat) - float(self.secondNode.lat))**2)
 
 GetNodesChildren()
@@ -116,16 +116,15 @@ class Graph():
         
         if firstNode in self.adyacencia:
             self.adyacencia[firstNode].append([secondNode, edge.cost()])
-            if not edge.dirigido:
+            if not edge.oneway:
                 if secondNode not in self.adyacencia:
                     self.adyacencia.setdefault(secondNode, [[firstNode, edge.cost()]])
                 else:
 
                     self.adyacencia[secondNode].append([firstNode, edge.cost()])
 
-
         else:
-            if edge.dirigido:
+            if edge.oneway:
                 self.adyacencia.setdefault(firstNode, [[secondNode, edge.cost()]])
             else:
                 self.adyacencia.setdefault(firstNode, [[secondNode, edge.cost()]])
