@@ -12,5 +12,6 @@ Para este proyecto se utiliza el algotimo UCS o mejor conocido como algoritmo de
 * La distancia calculada es distancia por vía, no euclideana ni por aire. 
 * Permite al usuario ingresar el punto de inicio y el final (En el archivo ucs.py [Latitud y Longitud]).
 * El sistema permite ver el mapa al mostrar el resultado de la ruta hallada.
+> Para iniciar el programa debe ejecutar el archivo ucs.py
 
 ![Mapa](./Mapa.PNG)
