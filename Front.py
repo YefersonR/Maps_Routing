@@ -10,14 +10,13 @@ def draw_solution(initialNode,goalNode,shorterPath):
         zoom_start=16
     )
 
-    folium.Marker(location=initialNode,popup=f"{initialNode}").add_to(mapa)
-    folium.Circle(location=initialNode,color="green",radius=10,weight=10,fill_opacity=0.5,tooltip=f"{initialNode}").add_to(mapa)
+    folium.Marker(location=initialNode,popup=f"Starting Point").add_to(mapa)
+    folium.Circle(location=initialNode,color="green",radius=10,weight=10,fill_opacity=0.5,tooltip=f"Starting Point: {initialNode}").add_to(mapa)
 
+    folium.Marker(location=goalNode,popup=f"Destination").add_to(mapa)
+    folium.Circle(location=goalNode,color="red",radius=10,weight=10,fill_opacity=0.5,tooltip=f"Destination: {goalNode}").add_to(mapa)
 
-    folium.Marker(location=goalNode,popup=f"{goalNode}").add_to(mapa)
-    folium.Circle(location=goalNode,color="red",radius=10,weight=10,fill_opacity=0.5,tooltip=f"{goalNode}").add_to(mapa)
-
-    folium.PolyLine(shorterPath, tooltip="Coast").add_to(mapa)
+    folium.PolyLine(shorterPath, tooltip="Shorter Path").add_to(mapa)
     # print(shorterPath)
     minimap = MiniMap()
     mapa.add_child(minimap)

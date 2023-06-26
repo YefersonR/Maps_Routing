@@ -65,8 +65,6 @@ def GetWays():
                 if(tag.attrib["k"] == 'oneway' and tag.attrib["v"] == 'yes'):
                     via.oneway == True
 
-
-
             if tag.tag == 'nd':
                 for node in nodes:
                     if node.id == tag.attrib['ref']:
@@ -113,16 +111,13 @@ class Graph():
     def addAdyacencia(self,edge:Edge):
         firstNode = edge.firstNode.cord()
         secondNode = edge.secondNode.cord()
-        
         if firstNode in self.adyacencia:
             self.adyacencia[firstNode].append([secondNode, edge.cost()])
             if not edge.oneway:
                 if secondNode not in self.adyacencia:
                     self.adyacencia.setdefault(secondNode, [[firstNode, edge.cost()]])
                 else:
-
                     self.adyacencia[secondNode].append([firstNode, edge.cost()])
-
         else:
             if edge.oneway:
                 self.adyacencia.setdefault(firstNode, [[secondNode, edge.cost()]])
@@ -135,3 +130,4 @@ class Graph():
                 else:
 
                     self.adyacencia[secondNode].append([firstNode, edge.cost()])
+

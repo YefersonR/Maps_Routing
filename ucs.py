@@ -10,9 +10,9 @@ from Mapa import (
 )
 from Front import draw_solution
 import heapq #https://docs.python.org/3/library/heapq.html
+
 def UCS(initialNode, goalNode, adjacencyList):
     FrontierCost = []
-
     frontier = []
     explored = []
     path = dict()
@@ -33,7 +33,6 @@ def UCS(initialNode, goalNode, adjacencyList):
 
             solution = []
             n = state[0]
-
             while path[n] != n:
                 solution.append(n)
                 n = path[n]
@@ -61,7 +60,7 @@ def UCS(initialNode, goalNode, adjacencyList):
 
 
 g = Graph(ways)
-shorterPath = UCS((18.4870666,-69.8769768),(18.4819294, -69.8799627), g.getAdyacencia())
+shorterPath = UCS((18.4961680,-69.8886738), (18.4759391, -69.9087016), g.getAdyacencia())
 
 
 # (18.4873418,-69.8836541),(18.4869884,-69.8891887)
